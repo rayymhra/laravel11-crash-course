@@ -19,3 +19,10 @@ Route::get('/hai', function () {
 
 // route /hi ngakses halooController 
 Route::get('/hi', [halooController::class, 'index']);
+
+
+
+// route ke todo
+Route::get('/todo', function(){
+    return view('todo.app');
+});
