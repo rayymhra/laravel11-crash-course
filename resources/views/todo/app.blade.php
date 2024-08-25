@@ -40,11 +40,23 @@
             <div class="col-md-8">
              <div class="card mb-3">
                 <div class="card-body">
+                    {{-- ngasih tau kalo ga sesuai validasi (muncul pesan error)--}}
+                    @if ($errors->any()) {{-- any disini itu ngecek 'apakah ada' error --}}
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
                     <!-- 02. Form input data -->
-                    <form id="todo-form" action="" method="post">
+                    <form id="todo-form" action="{{ url('/todo') }}" method="post">
+                        @csrf  {{-- biar dinilai valid oleh laravel, karna kalo ga ditambahin @csrf bakal ga dianggep valid sama laravelnya --}}
                         <div class="input-group mb-3">
                             <input type="text" class="form-control" name="task" id="todo-input"
-                                placeholder="Tambah task baru" required>
+                                placeholder="Tambah task baru" required value="{{ old('task') }}"> <!-- fungsi value old karna kalo ga sesuai validasi, isi yg di form tuh bakal ilang, jadi biar ga ilang di ambil datanya lagi -->
                             <button class="btn btn-primary" type="submit">
                                 Simpan
                             </button>

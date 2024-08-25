@@ -3,6 +3,7 @@
 // kalo kita ngakses alamat tertentu aksi apa yg akan dijalakan
 
 use App\Http\Controllers\hi\halooController; //kalo pake extensions bakal otomatis dibikinin
+use App\Http\Controllers\todo\todoController;
 use Illuminate\Support\Facades\Route;
 
 // route / yg diakses blade welcome yg letaknya di resources->view
@@ -23,6 +24,11 @@ Route::get('/hi', [halooController::class, 'index']);
 
 
 // route ke todo
-Route::get('/todo', function(){
-    return view('todo.app');
-});
+// Route::get('/todo', function(){
+//     return view('todo.app');
+// });
+
+//route ke todo tapi view nya ada di controller
+Route::get('/todo', [todoController::class, 'index']);
+
+Route::post('/todo', [todoController::class, 'store']);
